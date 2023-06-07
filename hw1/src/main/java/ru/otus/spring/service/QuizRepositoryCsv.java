@@ -13,18 +13,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderCsv implements FileReader {
+public class QuizRepositoryCsv implements QuizRepository {
 
     private static final char SEMICOLON_SEPARATOR = ';';
 
     private final String path;
 
-    public FileReaderCsv(String path) {
+    public QuizRepositoryCsv(String path) {
         this.path = path;
     }
 
     @Override
-    public List<Quiz> readFile() {
+    public List<Quiz> getAll() {
         try (var inputStreamReader = new InputStreamReader(new ClassPathResource(path).getInputStream())) {
             CSVReader csvReader = getCsvReader(inputStreamReader);
             return getData(csvReader);

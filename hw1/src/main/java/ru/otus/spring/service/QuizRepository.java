@@ -4,7 +4,7 @@ import ru.otus.spring.domain.Quiz;
 
 import java.util.List;
 
-public interface FileReader {
+public interface QuizRepository {
 
-    List<Quiz> readFile();
+    List<Quiz> getAll();
 }

@@ -10,18 +10,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("/spring-test-context.xml")
-class FileReaderCsvTest {
+class QuizRepositoryCsvTest {
 
-    private final FileReader fileReaderCsv;
+    private final QuizRepository quizRepositoryCsv;
 
     @Autowired
-    public FileReaderCsvTest(FileReader fileReaderCsv) {
-        this.fileReaderCsv = fileReaderCsv;
+    public QuizRepositoryCsvTest(QuizRepository quizRepositoryCsv) {
+        this.quizRepositoryCsv = quizRepositoryCsv;
     }
 
     @Test
     @DisplayName("Проверка количества элементов")
     void readFile() {
-        Assertions.assertEquals(5, fileReaderCsv.readFile().size());
+        Assertions.assertEquals(5, quizRepositoryCsv.getAll().size());
     }
 }
