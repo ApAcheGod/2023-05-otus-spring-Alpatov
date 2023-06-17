@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Quiz;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.repository.QuizRepository;
+import ru.otus.spring.repository.StudentRepository;
 import ru.otus.spring.service.io.IOService;
 
 import java.util.List;
@@ -15,21 +16,19 @@ public class QuizServiceImpl implements QuizService{
 
     private final QuizRepository quizRepository;
 
-    private final StudentService studentService;
+    private final StudentRepository studentRepository;
 
     private final IOService iOServiceStreams;
 
-    private final ResultAnalyzeService resultAnalyzeService;
-
-    private final RequestUserInfoService requestUserInfoService;
+    private final TemplateService templateService;
 
     @Override
     public void startQuiz() {
-        requestUserInfoService.requestUserInfo();
-        Student student = studentService.getStudentInfo();
+        Student student = studentRepository.getStudent();
         List<Quiz> quizList = quizRepository.getAll();
         int studentResult = getStudentResult(quizList);
-        resultAnalyzeService.outputResult(student, studentResult);
+        String resultMessage = templateService.getResultMessage(student, studentResult);
+        iOServiceStreams.outputString(resultMessage);
     }
 
     private String askQuestionAndGetAnswer(Quiz quiz) {

@@ -1,18 +1,21 @@
-package ru.otus.spring.service;
+package ru.otus.spring.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Student;
-import ru.otus.spring.service.io.InputService;
+import ru.otus.spring.service.io.IOService;
 
 @Service
 @RequiredArgsConstructor
-public class StudentServiceImpl implements StudentService{
+public class ConsoleStudentRepository implements StudentRepository {
 
-    private final InputService iOServiceStreams;
+    private static final String REQUEST_USER_DATA_MESSAGE = "Please, Enter your name and surname";
+
+    private final IOService iOServiceStreams;
 
     @Override
-    public Student getStudentInfo() {
+    public Student getStudent() {
+        requestUserInfo();
         String[] userDate = iOServiceStreams.readString().split(" ");
         return createStudent(userDate);
     }
@@ -22,5 +25,9 @@ public class StudentServiceImpl implements StudentService{
                 .name(userDate[0])
                 .surname(userDate[1])
                 .build();
+    }
+
+    private void requestUserInfo() {
+        iOServiceStreams.outputString(REQUEST_USER_DATA_MESSAGE);
     }
 }
