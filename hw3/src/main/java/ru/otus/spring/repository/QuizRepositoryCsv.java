@@ -8,9 +8,9 @@ import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import ru.otus.spring.configuration.ApplicationProperties;
 import ru.otus.spring.domain.Quiz;
 import ru.otus.spring.service.ApplicationMessage;
+import ru.otus.spring.service.ResourceProvider;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +23,7 @@ public class QuizRepositoryCsv implements QuizRepository {
 
     private static final char SEMICOLON_SEPARATOR = ';';
 
-    private final ApplicationProperties applicationProperties;
+    private final ResourceProvider applicationProperties;
 
     private final ApplicationMessage applicationMessage;
 

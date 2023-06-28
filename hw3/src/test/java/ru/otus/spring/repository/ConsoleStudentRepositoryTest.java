@@ -4,17 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import ru.otus.spring.configuration.ApplicationProperties;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.service.ApplicationMessage;
+import ru.otus.spring.service.ResourceProvider;
 import ru.otus.spring.service.io.IOService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@ContextConfiguration(classes = ConsoleStudentRepository.class)
+@SpringBootTest(classes = ConsoleStudentRepository.class)
 class ConsoleStudentRepositoryTest {
 
     @Autowired
@@ -24,7 +22,7 @@ class ConsoleStudentRepositoryTest {
     private IOService iOServiceStreams;
 
     @MockBean
-    private ApplicationProperties applicationProperties;
+    private ResourceProvider applicationProperties;
 
     @MockBean
     private ApplicationMessage applicationMessage;

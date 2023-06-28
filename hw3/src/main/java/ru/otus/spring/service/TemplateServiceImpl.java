@@ -2,7 +2,6 @@ package ru.otus.spring.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.spring.configuration.ApplicationProperties;
 import ru.otus.spring.domain.Student;
 
 @Service
@@ -11,7 +10,7 @@ public class TemplateServiceImpl implements TemplateService {
 
     private final ApplicationMessage applicationMessage;
 
-    private final ApplicationProperties applicationProperties;
+    private final ResourceProvider applicationProperties;
 
     @Override
     public String getResultMessage(Student student, int countOfRightAnswers) {

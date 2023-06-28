@@ -6,19 +6,17 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import ru.otus.spring.configuration.ApplicationProperties;
 import ru.otus.spring.service.ApplicationMessage;
+import ru.otus.spring.service.ResourceProvider;
 
-@SpringBootTest
-@ContextConfiguration(classes = QuizRepositoryCsv.class)
+@SpringBootTest(classes = QuizRepositoryCsv.class)
 class QuizRepositoryCsvTest {
 
     @Autowired
     private QuizRepository quizRepository;
 
     @MockBean
-    private ApplicationProperties applicationProperties;
+    private ResourceProvider applicationProperties;
 
     @MockBean
     private ApplicationMessage applicationMessage;

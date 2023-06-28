@@ -2,9 +2,9 @@ package ru.otus.spring.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.otus.spring.configuration.ApplicationProperties;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.service.ApplicationMessage;
+import ru.otus.spring.service.ResourceProvider;
 import ru.otus.spring.service.io.IOService;
 
 
@@ -14,7 +14,7 @@ public class ConsoleStudentRepository implements StudentRepository {
 
     private final IOService iOServiceStreams;
 
-    private final ApplicationProperties applicationProperties;
+    private final ResourceProvider applicationProperties;
 
     private final ApplicationMessage applicationMessage;
 

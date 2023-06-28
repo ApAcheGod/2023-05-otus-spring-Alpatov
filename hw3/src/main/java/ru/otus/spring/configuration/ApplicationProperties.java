@@ -3,12 +3,14 @@ package ru.otus.spring.configuration;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
+import ru.otus.spring.service.LocaleProvider;
+import ru.otus.spring.service.ResourceProvider;
 
 import java.util.Locale;
 
 @Getter
 @ConfigurationProperties(prefix = "application")
-public class ApplicationProperties {
+public class ApplicationProperties implements LocaleProvider, ResourceProvider {
 
     private final Locale locale;
 
