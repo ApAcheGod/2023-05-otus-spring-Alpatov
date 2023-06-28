@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.repository.ConsoleStudentRepository;
+import ru.otus.spring.service.io.IOService;
 import ru.otus.spring.service.io.InputService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.when;
 class ConsoleStudentRepositoryTest {
 
     @Mock
-    private InputService iOServiceStreams;
+    private IOService iOServiceStreams;
 
     @InjectMocks
     private ConsoleStudentRepository studentServiceImpl;
