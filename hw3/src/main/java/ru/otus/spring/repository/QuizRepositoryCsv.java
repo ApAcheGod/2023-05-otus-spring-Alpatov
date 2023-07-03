@@ -23,7 +23,7 @@ public class QuizRepositoryCsv implements QuizRepository {
 
     private static final char SEMICOLON_SEPARATOR = ';';
 
-    private final ResourceProvider applicationProperties;
+    private final ResourceProvider resourceProvider;
 
     private final ApplicationMessage applicationMessage;
 
@@ -31,7 +31,7 @@ public class QuizRepositoryCsv implements QuizRepository {
     @Override
     public List<Quiz> getAll() {
         try (var inputStreamReader = new InputStreamReader(
-               new ClassPathResource(applicationMessage.getMessage(applicationProperties.getPath())).getInputStream())){
+               new ClassPathResource(applicationMessage.getMessage(resourceProvider.getPath())).getInputStream())){
             CSVReader csvReader = getCsvReader(inputStreamReader);
             return getData(csvReader);
         } catch (IOException e) {

@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.service.ApplicationMessage;
+import ru.otus.spring.service.QuizProperties;
 import ru.otus.spring.service.ResourceProvider;
 import ru.otus.spring.service.io.IOService;
 
@@ -22,7 +23,7 @@ class ConsoleStudentRepositoryTest {
     private IOService iOServiceStreams;
 
     @MockBean
-    private ResourceProvider applicationProperties;
+    private QuizProperties quizProperties;
 
     @MockBean
     private ApplicationMessage applicationMessage;

@@ -10,16 +10,16 @@ public class TemplateServiceImpl implements TemplateService {
 
     private final ApplicationMessage applicationMessage;
 
-    private final ResourceProvider applicationProperties;
+    private final QuizProperties quizProperties;
 
     @Override
     public String getResultMessage(Student student, int countOfRightAnswers) {
-        if (countOfRightAnswers >= applicationProperties.getPassingScore()) {
-            return String.format(applicationMessage.getMessage(applicationProperties.getPassedMessage()),
+        if (countOfRightAnswers >= quizProperties.getPassingScore()) {
+            return String.format(applicationMessage.getMessage(quizProperties.getPassedMessage()),
                     student.getName(),
                     countOfRightAnswers);
         } else {
-            return String.format(applicationMessage.getMessage(applicationProperties.getFailedMessage()),
+            return String.format(applicationMessage.getMessage(quizProperties.getFailedMessage()),
                     student.getName(),
                     countOfRightAnswers);
         }

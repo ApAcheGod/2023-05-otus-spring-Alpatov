@@ -16,7 +16,7 @@ class QuizRepositoryCsvTest {
     private QuizRepository quizRepository;
 
     @MockBean
-    private ResourceProvider applicationProperties;
+    private ResourceProvider resourceProvider;
 
     @MockBean
     private ApplicationMessage applicationMessage;

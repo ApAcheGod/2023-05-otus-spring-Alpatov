@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.domain.Student;
 import ru.otus.spring.service.ApplicationMessage;
-import ru.otus.spring.service.ResourceProvider;
+import ru.otus.spring.service.QuizProperties;
 import ru.otus.spring.service.io.IOService;
 
 
@@ -14,7 +14,7 @@ public class ConsoleStudentRepository implements StudentRepository {
 
     private final IOService iOServiceStreams;
 
-    private final ResourceProvider applicationProperties;
+    private final QuizProperties quizProperties;
 
     private final ApplicationMessage applicationMessage;
 
@@ -37,6 +37,6 @@ public class ConsoleStudentRepository implements StudentRepository {
     }
 
     private String getMessage() {
-        return applicationMessage.getMessage(applicationProperties.getRequestUserData());
+        return applicationMessage.getMessage(quizProperties.getRequestUserData());
     }
 }
