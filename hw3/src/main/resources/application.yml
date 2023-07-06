@@ -1,0 +1,11 @@
+spring:
+  messages:
+    basename: "i18n/messages"
+
+application:
+  path: questions.path
+  locale: en
+  requestUserData: request.user.data
+  passedMessage: template.passed
+  failedMessage: template.failed
+  passingScore: 3
