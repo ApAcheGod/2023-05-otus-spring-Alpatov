@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.domain.Quiz;
-import ru.otus.spring.service.ApplicationMessage;
 import ru.otus.spring.service.ResourceProvider;
 
 import java.io.IOException;
@@ -24,9 +23,6 @@ public class CsvQuizRepository implements QuizRepository {
     private static final char SEMICOLON_SEPARATOR = ';';
 
     private final ResourceProvider resourceProvider;
-
-    private final ApplicationMessage applicationMessage;
-
 
     @Override
     public List<Quiz> getAll() {

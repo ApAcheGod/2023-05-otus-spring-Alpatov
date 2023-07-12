@@ -56,25 +56,26 @@ class QuizServiceImplTest {
 
     private Student student;
     private List<Quiz> quizList = new ArrayList<>();
+    String outputResult = "Grate";
 
 
     @BeforeEach
     void setUp() {
         student = Student.builder().name("Nikita").surname("Alpatov").build();
         when(studentRepository.getStudent()).thenReturn(student);
-        when(applicationMessage.getMessage(Mockito.any())).thenReturn("questions_en.csv");
+        when(resourceProvider.getPath()).thenReturn("questions_en.csv");
         quizList = quizRepository.getAll();
         quizList.forEach(quiz -> {
             when(iOServiceStreams.readStringWithPrompt(quiz.getQuestion())).thenReturn(quiz.getAnswer());
         });
-        when(templateService.getResultMessage(any(), anyInt())).thenReturn("Grate");
+        when(templateService.getResultMessage(any(), anyInt())).thenReturn(outputResult);
     }
 
     @Test
     void inputTest() {
         quizService.startQuiz();
         Assertions.assertEquals(5, quizList.size());
-        verify(iOServiceStreams, times(1)).outputString(anyString());
+        verify(iOServiceStreams, times(1)).outputString(outputResult);
 
     }
 }

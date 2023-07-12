@@ -24,7 +24,7 @@ class CsvQuizRepositoryTest {
 
     @Test
     void getAll() {
-        Mockito.when(applicationMessage.getMessage(Mockito.any())).thenReturn("questions_en.csv");
+        Mockito.when(resourceProvider.getPath()).thenReturn("questions_en.csv");
         Assertions.assertEquals(5, quizRepository.getAll().size());
     }
 }
