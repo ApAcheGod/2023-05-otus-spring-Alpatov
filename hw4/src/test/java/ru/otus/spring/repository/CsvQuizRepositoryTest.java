@@ -9,8 +9,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.spring.service.ApplicationMessage;
 import ru.otus.spring.service.ResourceProvider;
 
-@SpringBootTest(classes = QuizRepositoryCsv.class)
-class QuizRepositoryCsvTest {
+@SpringBootTest(classes = CsvQuizRepository.class)
+class CsvQuizRepositoryTest {
 
     @Autowired
     private QuizRepository quizRepository;

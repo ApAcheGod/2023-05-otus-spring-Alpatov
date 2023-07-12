@@ -1,9 +1,9 @@
 spring:
   messages:
     basename: "i18n/messages"
-
+    encoding: "UTF-8"
 application:
-  path: questions.path
+  path: questions_en.csv
   locale: en
   requestUserData: request.user.data
   passedMessage: template.passed

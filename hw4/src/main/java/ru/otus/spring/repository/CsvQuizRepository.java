@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class QuizRepositoryCsv implements QuizRepository {
+public class CsvQuizRepository implements QuizRepository {
 
     private static final char SEMICOLON_SEPARATOR = ';';
 
@@ -31,7 +31,7 @@ public class QuizRepositoryCsv implements QuizRepository {
     @Override
     public List<Quiz> getAll() {
         try (var inputStreamReader = new InputStreamReader(
-               new ClassPathResource(applicationMessage.getMessage(resourceProvider.getPath())).getInputStream())) {
+               new ClassPathResource(resourceProvider.getPath()).getInputStream())) {
             CSVReader csvReader = getCsvReader(inputStreamReader);
             return getData(csvReader);
         } catch (IOException e) {
