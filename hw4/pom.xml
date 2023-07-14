@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-        <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <spring.shell.version>3.1.1</spring.shell.version>
+    </properties>
 
     <parent>
         <groupId>ru.otus.spring</groupId>
@@ -9,9 +13,10 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>hw3</artifactId>
+
+    <artifactId>hw4</artifactId>
     <version>1.0</version>
-    <name>hw3</name>
+    <name>hw4</name>
 
     <dependencies>
         <dependency>
@@ -22,6 +27,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
+            <version>${spring.shell.version}</version>
         </dependency>
     </dependencies>
 
