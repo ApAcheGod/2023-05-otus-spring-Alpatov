@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    
+    <changeSet id="2023-07-17--init" author="nik.alpatov@mail.ru">
+
+        <createTable tableName="BOOK" remarks="Книги">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор книги">
+                <constraints primaryKey="true" primaryKeyName="PK_BOOK_ID"/>
+            </column>
+            <column name="TITLE" type="varchar(255)" remarks="Название книги">
+                <constraints nullable="false" primaryKeyName="NOT_NULL_CONSTRAINT"/>
+            </column>
+            <column name="PUBLICATION_YEAR" type="smallint" remarks="Год публикации"/>
+            <column name="PAGE_COUNT" type="smallint" remarks="Количество страниц"/>
+        </createTable>
+
+        <createTable tableName="GENRE" remarks="Справочник жанров">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор жанра">
+                <constraints primaryKey="true" primaryKeyName="PK_GENRE_ID"/>
+            </column>
+            <column name="NAME" type="varchar(255)" remarks="Название жанра">
+                <constraints nullable="false" primaryKeyName="NOT_NULL_CONSTRAINT"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AUTHOR" remarks="Авторы">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор автора">
+                <constraints primaryKey="true" primaryKeyName="PK_AUTHOR_ID"/>
+            </column>
+            <column name="NAME" type="varchar(255)" remarks="Имя автора">
+                <constraints nullable="false" primaryKeyName="NOT_NULL_CONSTRAINT"/>
+            </column>
+            <column name="LAST_NAME" type="varchar(255)" remarks="Фамилия автора">
+                <constraints nullable="false" primaryKeyName="NOT_NULL_CONSTRAINT"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="AUTHOR2BOOK" remarks="Связь авторов с книгами">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор связи">
+                <constraints primaryKey="true" primaryKeyName="PK_AUTHOR2BOOK_ID"/>
+            </column>
+            <column name="AUTHOR_ID" type="UUID" remarks="Уникальный идентификатор автора"/>
+            <column name="BOOK_ID" type="UUID" remarks="Уникальный идентификатор книги"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="AUTHOR2BOOK"
+                                 baseColumnNames="AUTHOR_ID"
+                                 constraintName="FK_AUTHOR_ID"
+                                 referencedTableName="AUTHOR"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="AUTHOR2BOOK"
+                                 baseColumnNames="BOOK_ID"
+                                 constraintName="FK_BOOK_ID"
+                                 referencedTableName="BOOK"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+
+        <createTable tableName="BOOK2GENRE" remarks="Связь книг с жанрами">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор связи">
+                <constraints primaryKey="true" primaryKeyName="PK_BOOK2GENRE_ID"/>
+            </column>
+            <column name="BOOK_ID" type="UUID" remarks="Уникальный идентификатор книги"/>
+            <column name="GENRE_ID" type="UUID" remarks="Уникальный идентификатор жанра"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="BOOK2GENRE"
+                                 baseColumnNames="BOOK_ID"
+                                 constraintName="FK_BOOK_ID"
+                                 referencedTableName="BOOK"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="BOOK2GENRE"
+                                 baseColumnNames="GENRE_ID"
+                                 constraintName="FK_GENRE_ID"
+                                 referencedTableName="GENRE"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+
+    </changeSet>
+</databaseChangeLog>
