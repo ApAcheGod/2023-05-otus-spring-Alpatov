@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2023-08-13--create-comment-table" author="nik.alpatov@mail.ru">
+        <createTable tableName="COMMENT" remarks="Комментарии">
+            <column name="ID" type="UUID" defaultValue="gen_random_uuid()" remarks="Уникальный идентификатор комментария">
+                <constraints primaryKey="true" primaryKeyName="PK_COMMENT_ID"/>
+            </column>
+            <column name="COMMENT" type="varchar(4000)" remarks="Текст комментария">
+                <constraints nullable="false" primaryKeyName="NOT_NULL_CONSTRAINT"/>
+            </column>
+            <column name="BOOK_ID" type="UUID" remarks="Уникальный идентификатор книги"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="COMMENT"
+                                 baseColumnNames="BOOK_ID"
+                                 constraintName="FK_BOOK_ID"
+                                 referencedTableName="BOOK"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
