@@ -1,6 +1,5 @@
 package ru.otus.spring.hw6.service;
 
-import ru.otus.spring.hw6.entity.Book;
 import ru.otus.spring.hw6.entity.Comment;
 
 import java.util.List;
@@ -20,6 +19,4 @@ public interface CommentService {
     void save(Comment comment);
 
     void deleteById(UUID id);
-
-    List<Comment> findAllByBook(Book book);
 }

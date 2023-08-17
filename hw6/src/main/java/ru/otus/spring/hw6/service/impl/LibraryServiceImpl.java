@@ -1,9 +1,8 @@
 package ru.otus.spring.hw6.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.hw6.dto.AuthorDto;
 import ru.otus.spring.hw6.entity.Author;
 import ru.otus.spring.hw6.entity.Book;
 import ru.otus.spring.hw6.entity.Comment;
@@ -32,6 +31,7 @@ public class LibraryServiceImpl implements LibraryService {
     private final CommentService commentService;
 
     @Override
+    @Transactional
     public void get(String service, String id) {
         if ("Unknown".equals(service)) {
             System.out.println("Введите корректные параметры поиска");
@@ -97,16 +97,12 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
+    @Transactional
     public void getComments(String bookTitle) {
         Optional<Book> optionalBook = bookService.findByTitle(bookTitle);
-        if (optionalBook.isPresent()) {
-            commentService.findAllByBook(optionalBook.get())
-                    .stream()
-                    .map(Comment::getComment)
-                    .forEach(System.out::println);
-        } else {
-            System.out.printf("Книга %s не найдена", bookTitle);
-        }
+        optionalBook.ifPresentOrElse(
+                book -> book.getComments().forEach(System.out::println),
+                () -> System.out.printf("Книга %s не найдена", bookTitle));
     }
 
     @Override
@@ -221,11 +217,11 @@ public class LibraryServiceImpl implements LibraryService {
 
     private void getAuthor(String id) {
         if ("all".equals(id)) {
-            System.out.println(authorService.findAllDto());
+            System.out.println(authorService.findAll());
         } else {
-            Optional<AuthorDto> optionalAuthorDto = authorService.findDtoById(UUID.fromString(id));
-            if (optionalAuthorDto.isPresent()) {
-                System.out.println(optionalAuthorDto.get());
+            Optional<Author> optionalAuthor = authorService.findById(UUID.fromString(id));
+            if (optionalAuthor.isPresent()) {
+                System.out.println(optionalAuthor.get());
             } else {
                 System.out.println("Автор не найден");
             }

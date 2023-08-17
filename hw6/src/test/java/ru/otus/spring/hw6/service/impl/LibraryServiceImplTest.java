@@ -53,7 +53,7 @@ class LibraryServiceImplTest {
         System.setOut(new PrintStream(byteArrayOutputStream));
         libraryService.get("Unknown", uuid.toString());
 
-        Mockito.verify(authorService, Mockito.times(0)).findDtoById(uuid);
+        Mockito.verify(authorService, Mockito.times(0)).findById(uuid);
         Mockito.verify(bookService, Mockito.times(0)).findById(uuid);
         Mockito.verify(commentService, Mockito.times(0)).findById(uuid);
         Mockito.verify(genreService, Mockito.times(0)).findById(uuid);
@@ -67,14 +67,14 @@ class LibraryServiceImplTest {
 
         libraryService.get("a", uuid.toString());
 
-        Mockito.verify(authorService, Mockito.times(1)).findDtoById(uuid);
+        Mockito.verify(authorService, Mockito.times(1)).findById(uuid);
         Mockito.verify(bookService, Mockito.times(0)).findById(uuid);
         Mockito.verify(commentService, Mockito.times(0)).findById(uuid);
         Mockito.verify(genreService, Mockito.times(0)).findById(uuid);
 
         libraryService.get("a", "all");
 
-        Mockito.verify(authorService, Mockito.times(1)).findAllDto();
+        Mockito.verify(authorService, Mockito.times(1)).findAll();
         Mockito.verify(bookService, Mockito.times(0)).findAll();
         Mockito.verify(commentService, Mockito.times(0)).findAll();
         Mockito.verify(genreService, Mockito.times(0)).findAll();
@@ -86,14 +86,14 @@ class LibraryServiceImplTest {
 
         libraryService.get("b", uuid.toString());
 
-        Mockito.verify(authorService, Mockito.times(0)).findDtoById(uuid);
+        Mockito.verify(authorService, Mockito.times(0)).findById(uuid);
         Mockito.verify(bookService, Mockito.times(1)).findById(uuid);
         Mockito.verify(commentService, Mockito.times(0)).findById(uuid);
         Mockito.verify(genreService, Mockito.times(0)).findById(uuid);
 
         libraryService.get("b", "all");
 
-        Mockito.verify(authorService, Mockito.times(0)).findAllDto();
+        Mockito.verify(authorService, Mockito.times(0)).findAll();
         Mockito.verify(bookService, Mockito.times(1)).findAll();
         Mockito.verify(commentService, Mockito.times(0)).findAll();
         Mockito.verify(genreService, Mockito.times(0)).findAll();
@@ -105,14 +105,14 @@ class LibraryServiceImplTest {
 
         libraryService.get("g", uuid.toString());
 
-        Mockito.verify(authorService, Mockito.times(0)).findDtoById(uuid);
+        Mockito.verify(authorService, Mockito.times(0)).findById(uuid);
         Mockito.verify(bookService, Mockito.times(0)).findById(uuid);
         Mockito.verify(commentService, Mockito.times(0)).findById(uuid);
         Mockito.verify(genreService, Mockito.times(1)).findById(uuid);
 
         libraryService.get("g", "all");
 
-        Mockito.verify(authorService, Mockito.times(0)).findAllDto();
+        Mockito.verify(authorService, Mockito.times(0)).findAll();
         Mockito.verify(bookService, Mockito.times(0)).findAll();
         Mockito.verify(commentService, Mockito.times(0)).findAll();
         Mockito.verify(genreService, Mockito.times(1)).findAll();
@@ -124,14 +124,14 @@ class LibraryServiceImplTest {
 
         libraryService.get("c", uuid.toString());
 
-        Mockito.verify(authorService, Mockito.times(0)).findDtoById(uuid);
+        Mockito.verify(authorService, Mockito.times(0)).findById(uuid);
         Mockito.verify(bookService, Mockito.times(0)).findById(uuid);
         Mockito.verify(commentService, Mockito.times(1)).findById(uuid);
         Mockito.verify(genreService, Mockito.times(0)).findById(uuid);
 
         libraryService.get("c", "all");
 
-        Mockito.verify(authorService, Mockito.times(0)).findAllDto();
+        Mockito.verify(authorService, Mockito.times(0)).findAll();
         Mockito.verify(bookService, Mockito.times(0)).findAll();
         Mockito.verify(commentService, Mockito.times(1)).findAll();
         Mockito.verify(genreService, Mockito.times(0)).findAll();

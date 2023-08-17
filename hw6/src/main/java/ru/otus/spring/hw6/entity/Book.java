@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
@@ -63,20 +64,20 @@ public class Book {
 
     @ToString.Exclude
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "books", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<Author> authors = new HashSet<>();
 
     @ToString.Exclude
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "BOOK2GENRE",
             joinColumns = @JoinColumn(name = "BOOK_ID"),
             inverseJoinColumns = @JoinColumn(name = "GENRE_ID"))
     private Set<Genre> genres = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
+    @BatchSize(size = 10)
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
             mappedBy = "book", orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
@@ -89,10 +90,7 @@ public class Book {
             return false;
         }
         Book book = (Book) o;
-        return Objects.equals(id, book.id)
-                && Objects.equals(title, book.title)
-                && Objects.equals(publicationYear, book.publicationYear)
-                && Objects.equals(pageCount, book.getPageCount());
+        return Objects.equals(id, book.id);
     }
 
     @Override

@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import ru.otus.spring.hw6.entity.Book;
 import ru.otus.spring.hw6.entity.Comment;
 import ru.otus.spring.hw6.repository.CommentRepository;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,26 +43,6 @@ class CommentRepositoryImplTest {
     }
 
     @Test
-    @DisplayName("Добавление записи")
-    public void insert() {
-        UUID bookId = UUID.fromString("80e9ace3-1a83-40ae-b812-32b92785fb3b");
-
-        Book book = new Book(bookId, "Мастер и Маргарита", 1876, 432, new HashSet<>(), new HashSet<>(), new HashSet<>());
-
-        Comment comment = new Comment(null, "Test Comment", book);
-        book.getComments().add(comment);
-
-        commentRepository.insert(comment);
-
-        List<Comment> comments = commentRepository.findAllByBook(book);
-
-        Assertions.assertEquals(5, comments.size());
-        Optional<String> optionalComment = comments.stream().map(Comment::getComment).filter("Test Comment"::equals).findAny();
-        Assertions.assertTrue(optionalComment.isPresent());
-
-    }
-
-    @Test
     @DisplayName("Обновление записи")
     public void update() {
         UUID uuid = UUID.fromString("c094c253-1a81-4848-9ef5-3c41667514fb");
@@ -86,14 +64,5 @@ class CommentRepositoryImplTest {
         commentRepository.deleteById(uuid);
 
         Assertions.assertEquals(Optional.empty(), commentRepository.findById(uuid));
-    }
-
-    @Test
-    @DisplayName("Поиск по книге")
-    public void findByBook() {
-        Book book = new Book(UUID.fromString("80e9ace3-1a83-40ae-b812-32b92785fb3b"), "Мастер и Маргарита", 1876, 432, new HashSet<>(), new HashSet<>(), new HashSet<>());
-        List<Comment> comments = commentRepository.findAllByBook(book);
-        Assertions.assertEquals(4, comments.size());
-
     }
 }

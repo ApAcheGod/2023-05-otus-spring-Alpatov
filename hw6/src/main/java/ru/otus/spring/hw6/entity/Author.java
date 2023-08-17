@@ -3,14 +3,11 @@ package ru.otus.spring.hw6.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.NamedAttributeNode;
-import jakarta.persistence.NamedEntityGraph;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +29,6 @@ import java.util.UUID;
 @ToString
 @Entity
 @Table(name = "AUTHOR")
-@NamedEntityGraph(name = "author-books-entity-graph",
-        attributeNodes = {@NamedAttributeNode(value = "books")})
 public class Author {
 
     @Id
@@ -49,7 +44,7 @@ public class Author {
 
     @ToString.Exclude
     @BatchSize(size = 10)
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "AUTHOR2BOOK",
             joinColumns = @JoinColumn(name = "AUTHOR_ID"),
             inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
@@ -69,9 +64,7 @@ public class Author {
             return false;
         }
         Author author = (Author) o;
-        return Objects.equals(id, author.id)
-                && Objects.equals(name, author.name)
-                && Objects.equals(lastName, author.lastName);
+        return Objects.equals(id, author.id);
     }
 
     @Override

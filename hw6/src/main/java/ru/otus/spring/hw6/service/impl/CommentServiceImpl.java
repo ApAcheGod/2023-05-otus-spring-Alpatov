@@ -3,7 +3,6 @@ package ru.otus.spring.hw6.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.spring.hw6.entity.Book;
 import ru.otus.spring.hw6.entity.Comment;
 import ru.otus.spring.hw6.repository.CommentRepository;
 import ru.otus.spring.hw6.service.CommentService;
@@ -19,19 +18,19 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public Optional<Comment> findById(UUID id) {
         return commentRepository.findById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<Comment> findAll() {
         return commentRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void insert(Comment comment) {
         if (Objects.nonNull(comment.getId())) {
             throw new UnsupportedOperationException("Entity shouldn't contains ID");
@@ -40,6 +39,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void update(Comment comment) {
         if (Objects.isNull(comment.getId())) {
             throw new UnsupportedOperationException("Entity should contains ID");
@@ -48,18 +48,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void save(Comment comment) {
         commentRepository.save(comment);
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
         commentRepository.deleteById(id);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<Comment> findAllByBook(Book book) {
-        return commentRepository.findAllByBook(book);
     }
 }

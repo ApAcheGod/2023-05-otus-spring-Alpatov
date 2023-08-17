@@ -1,6 +1,5 @@
 package ru.otus.spring.hw6.repository;
 
-import ru.otus.spring.hw6.dto.AuthorDto;
 import ru.otus.spring.hw6.entity.Author;
 
 import java.util.List;
@@ -11,11 +10,7 @@ public interface AuthorRepository {
 
     Optional<Author> findById(UUID id);
 
-    Optional<AuthorDto> findDtoById(UUID id); // Не придумал нормальное название для ДТО
-
     List<Author> findAll();
-
-    List<AuthorDto> findAllDto();
 
     void insert(Author author);
 
@@ -26,7 +21,5 @@ public interface AuthorRepository {
     void deleteById(UUID id);
 
     Optional<Author> findByNameAndLasName(String name, String lastName);
-
-    Optional<AuthorDto> findDtoByNameAndLasName(String name, String lastName);
 
 }

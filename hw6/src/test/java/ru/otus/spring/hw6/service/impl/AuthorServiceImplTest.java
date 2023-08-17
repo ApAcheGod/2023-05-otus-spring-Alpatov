@@ -36,21 +36,9 @@ class AuthorServiceImplTest {
     }
 
     @Test
-    void findDtoById() {
-        authorService.findDtoById(any());
-        verify(authorRepository, times(1)).findDtoById(any());
-    }
-
-    @Test
     void findAll() {
         authorService.findAll();
         verify(authorRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findAllDto() {
-        authorService.findAllDto();
-        verify(authorRepository, times(1)).findAllDto();
     }
 
     @Test
@@ -92,11 +80,5 @@ class AuthorServiceImplTest {
     void findByNameAndLasName() {
         authorService.findByNameAndLasName(anyString(), anyString());
         verify(authorRepository, times(1)).findByNameAndLasName(anyString(), anyString());
-    }
-
-    @Test
-    void findDtoByNameAndLasName() {
-        authorService.findDtoByNameAndLasName(anyString(), anyString());
-        verify(authorRepository, times(1)).findDtoByNameAndLasName(anyString(), anyString());
     }
 }

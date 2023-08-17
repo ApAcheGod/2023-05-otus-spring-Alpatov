@@ -2,7 +2,6 @@ package ru.otus.spring.hw6.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -15,8 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Objects;
@@ -41,8 +38,7 @@ public class Comment {
     @Column(name = "COMMENT", nullable = false)
     private String comment;
 
-    @Fetch(FetchMode.SELECT)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "BOOK_ID")
     @ToString.Exclude
     private Book book;
@@ -56,8 +52,7 @@ public class Comment {
             return false;
         }
         Comment comment = (Comment) o;
-        return Objects.equals(id, comment.id)
-                && Objects.equals(this.comment, comment.comment);
+        return Objects.equals(id, comment.id);
     }
 
     @Override

@@ -3,10 +3,9 @@ package ru.otus.spring.hw6.repository.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.hw6.entity.Genre;
 import ru.otus.spring.hw6.repository.GenreRepository;
 
@@ -15,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class GenreRepositoryImpl implements GenreRepository {
 
@@ -54,9 +53,7 @@ public class GenreRepositoryImpl implements GenreRepository {
 
     @Override
     public void deleteById(UUID id) {
-        Query query = em.createQuery("delete from Genre g where g.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        em.remove(em.find(Genre.class, id));
     }
 
     @Override

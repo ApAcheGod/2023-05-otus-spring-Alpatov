@@ -4,10 +4,9 @@ import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import ru.otus.spring.hw6.entity.Book;
 import ru.otus.spring.hw6.repository.BookRepository;
 
@@ -18,7 +17,7 @@ import java.util.UUID;
 
 import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepository {
 
@@ -27,14 +26,11 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Optional<Book> findById(UUID id) {
-        // По идее, нам нужно вся связи, если мы проваливаемся на страницу определенной книги
-        EntityGraph<?> entityGraph = em.getEntityGraph("book-authors-genres-comments-entity-graph");
         TypedQuery<Book> query = em.createQuery("select distinct b from Book b " +
                 "left join fetch b.authors " +
-                "left join fetch b.comments " +
+//                "left join fetch b.comments " +
                 "left join fetch b.genres " +
                 "where b.id = :id", Book.class);
-        query.setHint(FETCH.getKey(), entityGraph);
         query.setParameter("id", id);
         try {
             return Optional.ofNullable(query.getSingleResult());
@@ -44,7 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<Book> findAll() { // Комментарии не нужны
+    public List<Book> findAll() {
         EntityGraph<?> entityGraph = em.getEntityGraph("book-authors-genres-entity-graph");
         TypedQuery<Book> query = em.createQuery("select distinct b from Book b " +
                 "left join fetch b.authors " +
@@ -74,19 +70,15 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void deleteById(UUID id) {
-        Query query = em.createQuery("delete from Book b where b.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        em.remove(em.find(Book.class, id));
     }
 
     @Override
-    public Optional<Book> findByTitle(String title) { // Комментарии не нужны
-        EntityGraph<?> entityGraph = em.getEntityGraph("book-authors-genres-entity-graph");
+    public Optional<Book> findByTitle(String title) {
         TypedQuery<Book> query = em.createQuery("select distinct b from Book b " +
                 "left join fetch b.authors " +
                 "left join fetch b.genres " +
                 "where b.title = :title", Book.class);
-        query.setHint(FETCH.getKey(), entityGraph);
         query.setParameter("title", title);
         try {
             return Optional.ofNullable(query.getSingleResult());

@@ -18,19 +18,19 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    @Transactional(readOnly = true)
     @Override
     public Optional<Book> findById(UUID id) {
         return bookRepository.findById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
+    @Transactional(readOnly = true)
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
     @Override
+    @Transactional
     public void insert(Book book) {
         if (Objects.nonNull(book.getId())) {
             throw new UnsupportedOperationException("Entity shouldn't contains ID");
@@ -39,6 +39,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void update(Book book) {
         if (Objects.isNull(book.getId())) {
             throw new UnsupportedOperationException("Entity should contains ID");
@@ -47,16 +48,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void save(Book book) {
         bookRepository.save(book);
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
         bookRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public Optional<Book> findByTitle(String title) {
         return bookRepository.findByTitle(title);

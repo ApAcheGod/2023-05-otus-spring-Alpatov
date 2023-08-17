@@ -1,6 +1,5 @@
 package ru.otus.spring.hw6.service;
 
-import ru.otus.spring.hw6.dto.AuthorDto;
 import ru.otus.spring.hw6.entity.Author;
 
 import java.util.List;
@@ -11,11 +10,7 @@ public interface AuthorService {
 
     Optional<Author> findById(UUID id);
 
-    Optional<AuthorDto> findDtoById(UUID id);
-
     List<Author> findAll();
-
-    List<AuthorDto> findAllDto();
 
     void insert(Author author);
 
@@ -27,5 +22,4 @@ public interface AuthorService {
 
     Optional<Author> findByNameAndLasName(String name, String lastName);
 
-    Optional<AuthorDto> findDtoByNameAndLasName(String name, String lastName);
 }
