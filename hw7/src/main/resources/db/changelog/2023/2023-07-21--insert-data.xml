@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2023-07-21--insert-genre-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="GENRE"
+                  file="../data/2023-07-21--genre-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="NAME" name="NAME" type="varchar(255)"/>
+
+        </loadData>
+    </changeSet>
+
+    <changeSet id="2023-07-21--insert-book-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="BOOK"
+                  file="../data/2023-07-21--book-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="TITLE" name="TITLE" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="2023-07-21--insert-author-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="AUTHOR"
+                  file="../data/2023-07-21--author-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="NAME" name="NAME" type="varchar(255)"/>
+            <column header="LAST_NAME" name="LAST_NAME" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="2023-07-21--insert-author2book-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="AUTHOR2BOOK"
+                  file="../data/2023-07-21--author2book-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="AUTHOR_ID" name="AUTHOR_ID" type="UUID"/>
+            <column header="BOOK_ID" name="BOOK_ID" type="UUID"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="2023-07-21--insert-book2genre-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="BOOK2GENRE"
+                  file="../data/2023-07-21--book2genre-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="BOOK_ID" name="BOOK_ID" type="UUID"/>
+            <column header="GENRE_ID" name="GENRE_ID" type="UUID"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
