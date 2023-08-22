@@ -2,7 +2,6 @@ package ru.otus.spring.hw7.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.hw7.entity.Book;
 import ru.otus.spring.hw7.repository.BookRepository;
 import ru.otus.spring.hw7.service.BookService;
@@ -23,19 +22,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
     @Override
-    @Transactional
     public void save(Book book) {
         bookRepository.save(book);
     }
 
     @Override
-    @Transactional
     public void deleteById(UUID id) {
         bookRepository.deleteById(id);
     }
