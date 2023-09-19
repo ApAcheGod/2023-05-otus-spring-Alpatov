@@ -46,6 +46,7 @@
         <module>hw8</module>
         <module>hw9</module>
         <module>hw11</module>
+        <module>hw12</module>
     </modules>
 
     <dependencies>
