@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="2023-08-13--insert-comment-data" author="nik.alpatov@mail.ru">
+        <loadData tableName="COMMENT"
+                  file="../data/2023-08-13--comment-data.csv"
+                  relativeToChangelogFile="true"
+                  separator=";"
+                  quotchar="'">
+
+            <column header="ID" name="ID" type="UUID"/>
+            <column header="COMMENT" name="COMMENT" type="varchar(4000)"/>
+            <column header="BOOK_ID" name="BOOK_ID" type="UUID"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
