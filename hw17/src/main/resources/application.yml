@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=public
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  jpa:
+    show-sql: true
+  jmx:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics, health, logfile
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+logging:
+  file:
+    name: hw16.log
