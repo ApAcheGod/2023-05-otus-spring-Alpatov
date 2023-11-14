@@ -17,7 +17,6 @@ import ru.otus.spring.hw18.entity.Book;
 import ru.otus.spring.hw18.entity.Comment;
 import ru.otus.spring.hw18.entity.Genre;
 import ru.otus.spring.hw18.service.BookService;
-import ru.otus.spring.hw17.mapper.*;
 import ru.otus.spring.hw18.mapper.*;
 
 import java.util.*;
