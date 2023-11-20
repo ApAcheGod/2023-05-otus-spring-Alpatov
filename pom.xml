@@ -20,6 +20,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.version>3.5.1</maven.compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.context.version>6.0.9</spring.context.version>
         <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
@@ -52,6 +53,8 @@
         <module>hw15</module>
         <module>hw16</module>
         <module>hw17</module>
+        <module>hw18</module>
+
     </modules>
 
     <dependencies>
